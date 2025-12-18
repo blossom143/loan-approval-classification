@@ -17,7 +17,7 @@ st.set_page_config(page_title="Loan Approval Classification", page_icon="💰", 
 SCHEMA_PATH = Path("/app/data/data_schema.json")
 
 # API_URL is set in docker-compose environment
-API_BASE_URL = os.getenv("API_URL", "http://localhost:8000")
+API_BASE_URL = os.getenv("API_URL", "http://68.183.149.115:8000")
 PREDICT_ENDPOINT = f"{API_BASE_URL}/predict"
 
 # -----------------------------------------------------------------------------
@@ -39,9 +39,9 @@ categorical_features = schema.get("categorical", {})
 # -----------------------------------------------------------------------------
 # Streamlit UI
 # -----------------------------------------------------------------------------
-st.title("💰 Housing Prediction App")
+st.title("💰 Loan Approval Classification App")
 st.write(
-    f"This app sends your inputs to the FastAPI backend at **{API_BASE_URL}** for prediction."
+    f"This app sends your inputs to the FastAPI backend at **{API_BASE_URL}** for classification."
 )
 
 st.header("Input Features")

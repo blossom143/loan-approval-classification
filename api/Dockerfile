@@ -17,6 +17,7 @@ COPY housing_pipeline.py .
 
 # 3. Ensure models dir exists (will be mounted from host)
 RUN mkdir -p /app/models
+COPY my_global_best_model.pkl /app/models/my_global_best_model.pkl
 
 EXPOSE 8000
 
