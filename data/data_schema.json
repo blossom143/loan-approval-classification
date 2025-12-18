@@ -1,70 +1,79 @@
 {
   "numerical": {
-    "longitude": {
-      "min": -124.35,
-      "max": -114.31,
-      "mean": -119.56970445736432,
-      "median": -118.49
+    " cibil_score": {
+      "min": 300.00,
+      "max": 900.00,
+      "mean": 600.0,
+      "median": 600.0
     },
-    "latitude": {
-      "min": 32.54,
-      "max": 41.95,
-      "mean": 35.63186143410853,
-      "median": 34.26
+    " income_annum": {
+      "min": 200000.0,
+      "max": 9900000.0,
+      "mean": 5100000.0,
+      "median": 5100000.00
     },
-    "housing_median_age": {
-      "min": 1.0,
-      "max": 52.0,
-      "mean": 28.639486434108527,
-      "median": 29.0
+    " luxury_assets_value": {
+      "min": 300000.0,
+      "max": 39200000.0,
+      "mean": 15126305.0,
+      "median": 14600000.0
     },
-    "total_rooms": {
+    " residential_assets_value": {
+      "min": -100000.0,
+      "max": 29100000.0,
+      "mean": 7472616.0,
+      "median": 5600000.0
+    },
+    " bank_asset_value": {
+      "min": 0.0,
+      "max": 14700000.0,
+      "mean": 4976692.0,
+      "median": 4600000.0
+    },
+    " loan_amount": {
+      "min": 300000.0,
+      "max": 39500000.0,
+      "mean": 15133450.0,
+      "median": 14500000.0
+    },
+    " no_of_dependents": {
+      "min": 0.0,
+      "max": 5.0,
+      "mean": 2.0,
+      "median": 3.0
+    },
+    " commercial_assets_value": {
+      "min": 0.0,
+      "max": 19400000.0,
+      "mean": 4973155.0,
+      "median": 3700000.0
+    },
+    " loan_term": {
       "min": 2.0,
-      "max": 39320.0,
-      "mean": 2635.7630813953488,
-      "median": 2127.0
+      "max": 20.0,
+      "mean": 10.0,
+      "median": 10.0
     },
-    "total_bedrooms": {
+    "loan_id": {
       "min": 1.0,
-      "max": 6445.0,
-      "mean": 537.8705525375618,
-      "median": 435.0
-    },
-    "population": {
-      "min": 3.0,
-      "max": 35682.0,
-      "mean": 1425.4767441860465,
-      "median": 1166.0
-    },
-    "households": {
-      "min": 1.0,
-      "max": 6082.0,
-      "mean": 499.5396802325581,
-      "median": 409.0
-    },
-    "median_income": {
-      "min": 0.4999,
-      "max": 15.0001,
-      "mean": 3.8706710029069766,
-      "median": 3.5347999999999997
+      "max": 4269.0,
+      "mean": 2135.0,
+      "median": 2135.0
     }
   },
   "categorical": {
-    "ocean_proximity": {
+    " self_employed": {
       "unique_values": [
-        "NEAR BAY",
-        "<1H OCEAN",
-        "INLAND",
-        "NEAR OCEAN",
-        "ISLAND"
-      ],
-      "value_counts": {
-        "<1H OCEAN": 9136,
-        "INLAND": 6551,
-        "NEAR OCEAN": 2658,
-        "NEAR BAY": 2290,
-        "ISLAND": 5
-      }
+        "No",
+        "Yes"
+      ]
+    },
+      " education": {
+      "unique_values": [
+        "Graduate",
+        "Not Graduate"
+      ]
     }
   }
+  
 }

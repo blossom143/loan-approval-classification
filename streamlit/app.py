@@ -9,7 +9,7 @@ import streamlit as st
 # -----------------------------------------------------------------------------
 # MUST be the first Streamlit command
 # -----------------------------------------------------------------------------
-st.set_page_config(page_title="Housing Prediction", page_icon="🏠", layout="centered")
+st.set_page_config(page_title="Loan Approval Classification", page_icon="💰", layout="centered")
 
 # -----------------------------------------------------------------------------
 # Config
@@ -39,7 +39,7 @@ categorical_features = schema.get("categorical", {})
 # -----------------------------------------------------------------------------
 # Streamlit UI
 # -----------------------------------------------------------------------------
-st.title("🏠 Housing Prediction App")
+st.title("💰 Housing Prediction App")
 st.write(
     f"This app sends your inputs to the FastAPI backend at **{API_BASE_URL}** for prediction."
 )
@@ -54,7 +54,10 @@ user_input: Dict[str, Any] = {}
 st.subheader("Numerical Features")
 
 # Decide which features use sliders
-SLIDER_FEATURES = {"longitude", "latitude", "housing_median_age", "median_income"}
+SLIDER_FEATURES = {" cibil_score", " income_annum", " luxury_assets_value", " residential_assets_value",
+                   " bank_asset_value", " loan_amount", " no_of_dependents", "loan_id",
+                   " commercial_assets_value", " loan_term"}
+
 
 for feature_name, stats in numerical_features.items():
     min_val = float(stats.get("min", 0.0))
@@ -73,13 +76,13 @@ for feature_name, stats in numerical_features.items():
 
     if feature_name in SLIDER_FEATURES:
         # Determine step size based on range and semantics
-        if feature_name in {"housing_median_age"}:
-            step = 1.0  # age in years, int-like
-        elif feature_name in {"median_income"}:
-            step = 0.1  # more granular
-        else:
-            # generic heuristic for latitude/longitude
-            step = 0.01
+        # if feature_name in {"no_of_dependents", "loan_term", "loan_id"}:
+        step = 1.0  # age in years, int-like
+        # elif feature_name in {"median_income"}:
+        #     step = 0.1  # more granular
+        # else:
+        #     # generic heuristic for latitude/longitude
+        #     step = 0.01
 
         user_input[feature_name] = st.slider(
             label,
@@ -167,18 +170,21 @@ if st.button("🔮 Predict", type="primary"):
                 preds = data.get("predictions", [])
 
                 if not preds:
-                    st.warning("⚠️ No predictions returned from API.")
+                    st.warning("⚠️ No classifications returned from API.")
                 else:
                     pred = preds[0]
-                    st.success("✅ Prediction successful!")
+                    st.success("✅ Classification successful!")
 
                     st.subheader("Prediction Result")
 
                     # Display prediction with nice formatting
                     if isinstance(pred, (int, float)):
-                        st.metric(label="Predicted Value", value=f"{pred:,.2f}")
-                    else:
-                        st.metric(label="Predicted Class", value=str(pred))
+                        if pred:
+                            pred = "Loan Denied"
+                        else:
+                            pred = "Loan Approved"
+                        # st.metric(label="Predicted Class", value=f"{pred:.2f}")
+                        st.metric(label="Predicted Loan Amount", value=pred)
 
                     # Show input summary in expander
                     with st.expander("📋 View Input Summary"):

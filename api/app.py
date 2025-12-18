@@ -24,7 +24,7 @@ from housing_pipeline import (
 # -----------------------------------------------------------------------------
 # Configuration
 # -----------------------------------------------------------------------------
-MODEL_PATH = Path("/app/models/global_best_model_optuna.pkl")
+MODEL_PATH = Path("/app/models/my_global_best_model.pkl")
 
 app = FastAPI(
     title="Housing Price Prediction API",
@@ -72,15 +72,28 @@ class PredictRequest(BaseModel):
             "example": {
                 "instances": [
                     {
-                        "longitude": -122.23,
-                        "latitude": 37.88,
-                        "housing_median_age": 41.0,
-                        "total_rooms": 880.0,
-                        "total_bedrooms": 129.0,
-                        "population": 322.0,
-                        "households": 126.0,
-                        "median_income": 8.3252,
-                        "ocean_proximity": "NEAR BAY",
+                        # "longitude": -122.23,
+                        # "latitude": 37.88,
+                        # "housing_median_age": 41.0,
+                        # "total_rooms": 880.0,
+                        # "total_bedrooms": 129.0,
+                        # "population": 322.0,
+                        # "households": 126.0,
+                        # "median_income": 8.3252,
+                        # "ocean_proximity": "NEAR BAY",
+                        'cibil_score': 600.0,
+                        'income_annum': 5100000.0,
+                        'luxury_assets_value': 14600000.0,
+                        'residential_assets_value': 5600000.0,
+                        'bank_asset_value': 4600000.0,
+                        'loan_amount': 14500000.0,
+                        'no_of_dependents': 3.0,
+                        'loan_id': 2135.0,
+                        'commercial_assets_value': 3700000.0,
+                        'self_employed': 'No',
+                        'education': 'Graduate',
+                        'loan_term': 10.0,
+                        
                     }
                 ]
             }
@@ -106,7 +119,7 @@ class PredictResponse(BaseModel):
 @app.get("/")
 def root():
     return {
-        "name": "Housing Price Prediction API",
+        "name": "Loan Approval Classification API",
         "version": "1.0.0",
         "endpoints": {
             "health": "/health",
@@ -142,15 +155,27 @@ def predict(request: PredictRequest):
         )
 
     required_columns = [
-        "longitude",
-        "latitude",
-        "housing_median_age",
-        "total_rooms",
-        "total_bedrooms",
-        "population",
-        "households",
-        "median_income",
-        "ocean_proximity",
+        # "longitude",
+        # "latitude",
+        # "housing_median_age",
+        # "total_rooms",
+        # "total_bedrooms",
+        # "population",
+        # "households",
+        # "median_income",
+        # "ocean_proximity",
+        ' cibil_score',
+        ' income_annum',
+        ' luxury_assets_value',
+        ' residential_assets_value',
+        ' bank_asset_value',
+        ' loan_amount',
+        ' no_of_dependents',
+        'loan_id',
+        ' commercial_assets_value',
+        ' self_employed',
+        ' education',
+        ' loan_term'
     ]
     missing = set(required_columns) - set(X.columns)
     if missing:
@@ -175,7 +200,7 @@ def predict(request: PredictRequest):
 @app.on_event("startup")
 async def startup_event():
     print("\n" + "=" * 80)
-    print("Housing Price Prediction API - Starting Up")
+    print("Load Approval Classification API - Starting Up")
     print("=" * 80)
     print(f"Model path: {MODEL_PATH}")
     print(f"Model loaded: {model is not None}")
