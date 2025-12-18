@@ -1,7 +1,7 @@
 
 services:
   api:
-    platform: linux/amd64
+    #platform: linux/amd64
     build:
       context: ./api
       dockerfile: Dockerfile
@@ -19,7 +19,7 @@ services:
     restart: unless-stopped
 
   streamlit:
-    platform: linux/amd64
+    #platform: linux/amd64
     build:
       context: ./streamlit
       dockerfile: Dockerfile

@@ -24,7 +24,7 @@ from housing_pipeline import (
 # -----------------------------------------------------------------------------
 # Configuration
 # -----------------------------------------------------------------------------
-MODEL_PATH = Path("/app/models/my_global_best_model.pkl")
+MODEL_PATH = Path("/app/models/loan_global_best_model_optuna.pkl")
 
 app = FastAPI(
     title="Housing Price Prediction API",
