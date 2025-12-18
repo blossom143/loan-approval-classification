@@ -17,7 +17,7 @@ st.set_page_config(page_title="Loan Approval Classification", page_icon="💰", 
 SCHEMA_PATH = Path("/app/data/data_schema.json")
 
 # API_URL is set in docker-compose environment
-API_BASE_URL = os.getenv("API_URL", "http://68.183.149.115:8000")
+API_BASE_URL = os.getenv("API_URL", "http://167.172.29.110:8000")
 PREDICT_ENDPOINT = f"{API_BASE_URL}/predict"
 
 # -----------------------------------------------------------------------------
@@ -54,9 +54,9 @@ user_input: Dict[str, Any] = {}
 st.subheader("Numerical Features")
 
 # Decide which features use sliders
-SLIDER_FEATURES = {" cibil_score", " income_annum", " luxury_assets_value", " residential_assets_value",
-                   " bank_asset_value", " loan_amount", " no_of_dependents",
-                   " commercial_assets_value", " loan_term"}
+SLIDER_FEATURES = {"cibil_score", "income_annum", "luxury_assets_value", "residential_assets_value",
+                   "bank_asset_value", "loan_amount", "no_of_dependents",
+                   "commercial_assets_value", "loan_term"}
 
 
 for feature_name, stats in numerical_features.items():

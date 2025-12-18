@@ -1,7 +1,7 @@
 
 services:
   api:
-    #platform: linux/amd64
+    platform: linux/amd64
     build:
       context: ./api
       dockerfile: Dockerfile
@@ -19,7 +19,7 @@ services:
     restart: unless-stopped
 
   streamlit:
-    #platform: linux/amd64
+    platform: linux/amd64
     build:
       context: ./streamlit
       dockerfile: Dockerfile
@@ -31,7 +31,7 @@ services:
       # Mount data folder for future JSON schema loading
       - ./data:/app/data:ro
     environment:
-      - API_URL=http://68.183.149.115:8000
+      - API_URL=http://167.172.29.110:8000
       - PYTHONUNBUFFERED=1
     networks:
       - housing-network

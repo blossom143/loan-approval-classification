@@ -68,7 +68,7 @@
         "Yes"
       ]
     },
-      "education": {
+    "education": {
       "unique_values": [
         "Graduate",
         "Not Graduate"

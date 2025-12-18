@@ -24,7 +24,7 @@ from housing_pipeline import (
 # -----------------------------------------------------------------------------
 # Configuration
 # -----------------------------------------------------------------------------
-MODEL_PATH = Path("/app/models/loan_global_best_model_optuna.pkl")
+MODEL_PATH = Path("/app/models/my_global_best_model.pkl")
 
 app = FastAPI(
     title="Housing Price Prediction API",
@@ -174,7 +174,8 @@ def predict(request: PredictRequest):
         'commercial_assets_value',
         'self_employed',
         'education',
-        'loan_term'
+        'loan_term',
+        'loan_id'
     ]
     missing = set(required_columns) - set(X.columns)
     if missing:

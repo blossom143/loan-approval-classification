@@ -24,6 +24,11 @@ from sklearn.linear_model import Ridge
 from xgboost import XGBRegressor
 from lightgbm import LGBMRegressor
 
+from sklearn.linear_model import RidgeClassifier   # or LogisticRegression, etc.
+from sklearn.ensemble import HistGradientBoostingClassifier
+from xgboost import XGBClassifier
+from lightgbm import LGBMClassifier
+
 
 # =============================================================================
 # Custom transformer and helper functions
@@ -99,6 +104,18 @@ default_num_pipeline = make_pipeline(
     StandardScaler(),
 )
 
+def clip_negatives(X):
+    return np.clip(X, a_min=0, a_max=None)
+
+def pass_through_names(transformer, feature_names_in):
+    return feature_names_in
+
+def non_negative_pipeline():
+    return make_pipeline(
+        SimpleImputer(strategy="median"),
+        FunctionTransformer(clip_negatives, validate=True, feature_names_out=pass_through_names),
+        StandardScaler()
+    )
 
 def build_preprocessing():
     """
@@ -106,13 +123,14 @@ def build_preprocessing():
     """
     preprocessing = ColumnTransformer(
         [
-            ("bedrooms",        ratio_pipeline(), ["total_bedrooms", "total_rooms"]),
-            ("rooms_per_house", ratio_pipeline(), ["total_rooms", "households"]),
-            ("people_per_house",ratio_pipeline(), ["population", "households"]),
-            ("log",             log_pipeline,
-                ["total_bedrooms", "total_rooms", "population",
-                 "households", "median_income"]),
-            ("geo",             cluster_simil, ["latitude", "longitude"]),
+            # ("bedrooms",        ratio_pipeline(), ["total_bedrooms", "total_rooms"]),
+            # ("rooms_per_house", ratio_pipeline(), ["total_rooms", "households"]),
+            # ("people_per_house",ratio_pipeline(), ["population", "households"]),
+            # ("log",             log_pipeline,
+            #     ["residential_assets_value", "commercial_assets_value"]),
+            # ("geo",             cluster_simil, ["latitude", "longitude"]),
+            ("no_negatives", non_negative_pipeline(), ['income_annum', 'loan_amount', 'loan_term', 'cibil_score',
+                    'residential_assets_value', 'commercial_assets_value', 'luxury_assets_value', 'bank_asset_value']),
             ("cat",             cat_pipeline, make_column_selector(dtype_include=object)),
         ],
         remainder=default_num_pipeline,
@@ -130,11 +148,11 @@ def make_estimator_for_name(name: str):
     Used in PCA variants and (optionally) elsewhere.
     """
     if name == "ridge":
-        return Ridge()
+        return RidgeClassifier()
     elif name == "histgradientboosting":
-        return HistGradientBoostingRegressor(random_state=42)
+        return HistGradientBoostingClassifier(random_state=42)
     elif name == "xgboost":
-        return XGBRegressor(
+        return XGBClassifier(
             objective="reg:squarederror",
             random_state=42,
             n_estimators=300,
@@ -146,7 +164,7 @@ def make_estimator_for_name(name: str):
             n_jobs=-1,
         )
     elif name == "lightgbm":
-        return LGBMRegressor(
+        return LGBMClassifier(
             random_state=42,
             n_estimators=300,
             learning_rate=0.05,
