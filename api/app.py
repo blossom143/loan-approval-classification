@@ -164,18 +164,17 @@ def predict(request: PredictRequest):
         # "households",
         # "median_income",
         # "ocean_proximity",
-        ' cibil_score',
-        ' income_annum',
-        ' luxury_assets_value',
-        ' residential_assets_value',
-        ' bank_asset_value',
-        ' loan_amount',
-        ' no_of_dependents',
-        'loan_id',
-        ' commercial_assets_value',
-        ' self_employed',
-        ' education',
-        ' loan_term'
+        'cibil_score',
+        'income_annum',
+        'luxury_assets_value',
+        'residential_assets_value',
+        'bank_asset_value',
+        'loan_amount',
+        'no_of_dependents',
+        'commercial_assets_value',
+        'self_employed',
+        'education',
+        'loan_term'
     ]
     missing = set(required_columns) - set(X.columns)
     if missing:

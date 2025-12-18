@@ -55,7 +55,7 @@ st.subheader("Numerical Features")
 
 # Decide which features use sliders
 SLIDER_FEATURES = {" cibil_score", " income_annum", " luxury_assets_value", " residential_assets_value",
-                   " bank_asset_value", " loan_amount", " no_of_dependents", "loan_id",
+                   " bank_asset_value", " loan_amount", " no_of_dependents",
                    " commercial_assets_value", " loan_term"}
 
 
@@ -76,7 +76,7 @@ for feature_name, stats in numerical_features.items():
 
     if feature_name in SLIDER_FEATURES:
         # Determine step size based on range and semantics
-        # if feature_name in {"no_of_dependents", "loan_term", "loan_id"}:
+        # if feature_name in {"no_of_dependents", "loan_term"}:
         step = 1.0  # age in years, int-like
         # elif feature_name in {"median_income"}:
         #     step = 0.1  # more granular
