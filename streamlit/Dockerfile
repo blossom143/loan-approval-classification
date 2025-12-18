@@ -17,6 +17,7 @@ COPY app.py .
 
 # 3. Ensure data dir exists (will be mounted from host)
 RUN mkdir -p /app/data
+COPY data/data_schema.json /app/data/data_schema.json
 
 EXPOSE 8501
 
